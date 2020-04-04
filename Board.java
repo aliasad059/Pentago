@@ -1,4 +1,11 @@
+/**
+ * simulates a board in the pentago game
+ */
 public class Board {
+    // following array save the type of each stone
+    // 0 type means here is empty
+    // 1 means it is for the player 1
+    // 2 means it is for the player 2
     private static int[][] board;
 
     public Board() {
@@ -10,6 +17,9 @@ public class Board {
         }
     }
 
+    /**
+     * print the board
+     */
     public void printBoard() {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
@@ -26,9 +36,14 @@ public class Board {
         }
     }
 
+    /**
+     * check if the player won the game or not
+     * @param playerNumber player to check
+     * @return true if the the player is the winner and false if not
+     */
     public boolean checkWinner(int playerNumber) {
         int counter = 0;
-        //ofoghi
+        // check if the player has 5 stones in a row
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 if (j + 1 > 5) break;
@@ -40,7 +55,7 @@ public class Board {
                 return true;
             } else counter = 0;
         }
-        //amodi
+        // check if the player has 5 stones in a column
         for (int j = 0; j < 6; j++) {
             for (int i = 0; i < 6; i++) {
                 if (i + 1 > 5) break;
@@ -52,6 +67,7 @@ public class Board {
                 return true;
             } else counter = 0;
         }
+        // checking if the player has 5 stones cornerWise
         if (board[0][0] == playerNumber && board[1][1] == playerNumber && board[2][2] == playerNumber && board[3][3] == playerNumber && board[4][4] == playerNumber)
             return true;
         else if (board[1][1] == playerNumber && board[2][2] == playerNumber && board[3][3] == playerNumber && board[4][4] == playerNumber && board[5][5] == playerNumber)
@@ -73,6 +89,10 @@ public class Board {
 
     }
 
+    /**
+     * get the board of the game
+     * @return board
+     */
     public static int[][] getBoard() {
         return board;
     }

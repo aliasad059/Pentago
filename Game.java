@@ -1,8 +1,15 @@
 import java.util.Scanner;
 
+/**
+ * the game will start from here
+ */
+
 public class Game {
     static Scanner scanner = new Scanner(System.in);
 
+    /**
+     * starting the game in the multi mode
+     */
     public static void startMultiMode() {
         System.out.println("Starting MultiMode!");
         System.out.println("Human 1 stones are showed:" + '\u26AA');
@@ -15,6 +22,7 @@ public class Game {
         Board board = new Board();
         Player human1 = new Player(1);
         Player human2 = new Player(2);
+        //isFinished tells us if the game is finished or not
         boolean isFinished = false;
         while (true) {
             while (true) {
@@ -33,7 +41,7 @@ public class Game {
                     continue;
                 }
                 board.printBoard();
-
+                // if the player won the game after putting a new stone
                 if (board.checkWinner(1)) {
                     isFinished = true;
                     break;
@@ -51,9 +59,13 @@ public class Game {
             if (isFinished) {
                 System.out.println("human 1 won the game!");
                 break;
-            } else if (board.checkWinner(1)) {
+            }
+            // if the player won the game after the rotation
+            else if (board.checkWinner(1)) {
                 System.out.println("human 1 won the game! \nhuman 1 did a good rotation!");
-            } else if (board.checkWinner(2)) {
+            }
+            // if the player did a rotation that cause the opponent won the game
+            else if (board.checkWinner(2)) {
                 board.printBoard();
                 System.out.println("human 2 won the game! \nhuman 1 did a bad rotation!");
                 break;
@@ -74,7 +86,7 @@ public class Game {
                     continue;
                 }
                 board.printBoard();
-
+                //if the player won the game after putting a new stone
                 if (board.checkWinner(2)) {
                     isFinished = true;
                     break;
@@ -92,9 +104,13 @@ public class Game {
             if (isFinished) {
                 System.out.println("human 2 won the game!");
                 break;
-            } else if (board.checkWinner(2)) {
+            }
+            // if the player won the game with a good rotation
+            else if (board.checkWinner(2)) {
                 System.out.println("human 2 won the game! \nhuman 2 did a good rotation!");
-            } else if (board.checkWinner(1)) {
+            }
+            // if the player did a rotation that cause the opponent won the game
+            else if (board.checkWinner(1)) {
                 board.printBoard();
                 System.out.println("human 1 won the game! \nhuman 2 did a bad rotation!");
                 break;

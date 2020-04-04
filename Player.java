@@ -1,4 +1,6 @@
-
+/**
+ * the pentago game needs player ,in this class we simulate this
+ */
 public class Player {
     int type;
     private int[][] board;
@@ -9,6 +11,12 @@ public class Player {
         this.type = type;
     }
 
+    /**
+     * put a stone/disc in the board
+     * @param row
+     * @param column
+     * @return
+     */
     public boolean putDisc(int row, int column) {
         board = Board.getBoard();
         if (row > 5 || row < 0 || column > 5 || column < 0)
@@ -19,6 +27,11 @@ public class Player {
         } else return false;
     }
 
+    /**
+     * rotate the entered part of board
+     * @param rotate entered rotation
+     * @return false if the entered rotation text is not as it has to be (not in form of explained form)
+     */
     public boolean rotate(String rotate) {
         try {
             if (rotate.toLowerCase().equals("no")) {
@@ -51,6 +64,11 @@ public class Player {
         return false;
     }
 
+    /**
+     * copy the entered part of the board to the temp array. if there is no such a this, the changes will apply to the board directly and makes mistakes
+     * @param boardToRotate part of board that will be rotated
+     * @return
+     */
     private int[][] makeTempArray(int boardToRotate) {
 
         int[][] temp = new int[3][3];
@@ -75,10 +93,19 @@ public class Player {
         return temp;
     }
 
+    /**
+     * anti clockwise rotation means rotate the part 3 times clockwise
+     * @param temp the array that is made from the makeTempArray method
+     * @return rotated array
+     */
     private int[][] rotateAntiClockWise(int[][] temp) {
         return rotateClockWise(rotateClockWise(rotateClockWise(temp)));
     }
-
+    /**
+     * it actually arrange the stones in a row to stones in a column
+     * @param temp the array that is made from the makeTempArray method
+     * @return rotated array
+     */
     private int[][] rotateClockWise(int[][] temp) {
 
         int[][] rotatedArray = new int[3][3];
@@ -90,6 +117,10 @@ public class Player {
         return rotatedArray;
     }
 
+    /**
+     * check if the player is able to do a ineffectual rotation
+     * @return true if the player is able
+     */
     private boolean checkMayNotRotate() {
         boolean[] mustRotate = new boolean[4];
         for (int i = 0; i < 4; i++)
@@ -112,6 +143,11 @@ public class Player {
         return mustRotate[0] || mustRotate[1] || mustRotate[2] || mustRotate[3];
     }
 
+    /**
+     * apply the changes to the board
+     * @param boardToChange board to change number
+     * @param rotatedArray the rotated part of board
+     */
     private void changeBoard(int boardToChange, int[][] rotatedArray) {
         if (boardToChange == 1) {
             for (int i = 0; i < 3; i++)
